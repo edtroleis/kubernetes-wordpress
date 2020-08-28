@@ -1,0 +1,6 @@
+resources:
+  - ./app/deployment-app-sample.yaml
+  - ./app/service-app-sample.yaml
+  - ./db/permission-db-sample.yaml
+  - ./db/statefulset-db-sample.yaml
+  - ./db/service-db-sample.yaml
