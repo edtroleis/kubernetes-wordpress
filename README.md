@@ -146,6 +146,17 @@ kubectl get pods
 kubectl delete pods <pod_name>
 ```
 
+6. Access container
+```
+kubectl get pods
+kubectl exec -it <pod_name> sh
+```
+
+7. Access service from url
+```
+minikube service <service_name>
+```
+
 
 # Deploy Wordpress into the Minikube cluster
 ```
