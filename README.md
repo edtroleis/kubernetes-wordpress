@@ -59,6 +59,18 @@ chmod +x ./kubectl
 sudo mv ./kubectl /usr/local/bin/kubectl 
 ```
 
+# Uninstall minikube
+```
+minikube stop
+minikube delete
+docker stop $(docker ps -aq)
+rm -rf ~/.kube ~/.minikube
+sudo rm /usr/local/bin/localkube /usr/local/bin/minikube /usr/local/bin/kubectl
+systemctl stop '*kubelet*.mount'
+sudo rm -rf /etc/kubernetes/
+docker system prune -af --volumes
+```
+
 # Configuring Kubernetes cluster and kubernetes commands
 https://minikube.sigs.k8s.io/docs/start/
 
@@ -107,7 +119,7 @@ kubectl create/delete -f service-db-sample.yaml
 kubectl delete statefulsets <statefulset-name>
 ```
 
-7. Getting resource status (pods, deployments, services, statefulsets, persistentvolume)
+7. Getting resource status (pods, deployments, services, statefulsets, persistentvolume, etc)
 ```
 kubectl get pods
 kubectl get deployment
@@ -115,6 +127,9 @@ kubectl get service
 kubectl get statefulset
 kubectl get persistentvolume
 kubectl get pods <pod_name>
+kubectl get persistentvolume <volume_id> --output yaml
+
+kubectl get storageclass
 ```
 
 8. Details about a pod
