@@ -173,6 +173,11 @@ https://kubernetes.io/docs/tasks/access-application-cluster/list-all-running-con
 minikube service <service_name>
 ```
 
+16. Accessing minikube
+```
+minikube ssh
+```
+
 
 # Deploy Wordpress into the Minikube cluster
 ```
