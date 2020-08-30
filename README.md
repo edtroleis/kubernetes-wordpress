@@ -107,12 +107,13 @@ kubectl create/delete -f service-db-sample.yaml
 kubectl delete statefulsets <statefulset-name>
 ```
 
-7. Getting resource status (pods, deployments, services, statefulsets)
+7. Getting resource status (pods, deployments, services, statefulsets, persistentvolume)
 ```
 kubectl get pods
 kubectl get deployment
 kubectl get service
 kubectl get statefulset
+kubectl get persistentvolume
 kubectl get pods <pod_name>
 ```
 
