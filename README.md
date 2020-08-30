@@ -59,62 +59,12 @@ chmod +x ./kubectl
 sudo mv ./kubectl /usr/local/bin/kubectl 
 ```
 
-# Configuring Kubernetes cluster - Minukube
-
-1. Starting cluster
-```
-minikube start
-```
-
-2. Creating kubernetes cluster
-```
-kubectl create -f aplicacao.yaml
-```
-
-3. Showing pods
-```
-kubectl get pods
-```
-
-4. Deleting pods
-```
-kubectl delete pods aplicacao
-```
-
-5. Stopping cluster
-```
-minikube stop
-```
-
-6. Deleting cluster
-```
-minikube delete
-```
-
-
-# Docker and docker-compose commands
-```
-Used to test a docker-compose where containers work togheter to simulate the deploy in a Kubernets cluster
-
-docker-compose up -d
-docker-compose down
-docker-compose logs
-
-docker ps
-
-docker exec -it <database_container> sh
-mysql -u root
-use loja
-```
-
-# Configure kubernetes cluster
+# Configuring Kubernetes cluster and kubernetes commands
 https://minikube.sigs.k8s.io/docs/start/
 
-
-1. Inicializing minikube
+1. Starting minikube cluster
 ```
 minikube start
-
 
 # Increase performance
 a. Use logs command minikube logs
@@ -126,33 +76,99 @@ minikube start
 c. Minikube as default uses 2048MB of memory and 2 CPUs. You can enforce Minikube to create more using command "minikube start --cpus 3 --memory 4096"
 ```
 
-2. Using minikube cluster
+2. Checking minikube status
+```
+minikube status
+```
+
+3. Using minikube cluster
 ```
 kubectl config use-context minikube
 ```
 
-3. Configuring cluster
+4. Deleting minikube cluster
 ```
-kubectl create -f myapp.yaml
+minikube delete
 ```
 
-4. Checking cluster pods
+5. Stopping minikube cluster
+```
+minikube stop
+```
+
+6. Creating and deleting resources in Minikube
+```
+kubectl create/delete -f deployment-app-sample.yaml
+kubectl create/delete -f service-app-sample.yaml
+kubectl create/delete -f permission-db-sample.yaml
+kubectl create/delete -f statefulset-db-sample.yaml
+kubectl create/delete -f service-db-sample.yaml
+
+kubectl delete statefulsets <statefulset-name>
+```
+
+7. Getting resource status (pods, deployments, services, statefulsets)
 ```
 kubectl get pods
+kubectl get deployment
+kubectl get service
+kubectl get statefulset
+kubectl get pods <pod_name>
 ```
 
-5. Removing pod
+8. Details about a pod
+```
+kubectl describe pods <pod_name>
+kubectl describe pods | grep IP
+```
+
+9. Deleting pods
 ```
 kubectl delete pods <pod_name>
 ```
 
-6. Access container
+10. Access container
 ```
 kubectl get pods
 kubectl exec -it <pod_name> sh
 ```
 
-7. Access service from url
+11. Access service from url
+```
+minikube service <service_name>
+```
+
+12. Get url to access service
+```
+minikube service <service_name> --url
+
+minikube service list
+
+|----------------------|---------------------------|--------------|-------------------------|
+|      NAMESPACE       |           NAME            | TARGET PORT  |           URL           |
+|----------------------|---------------------------|--------------|-------------------------|
+| default              | db                        | No node port |                         |
+| default              | kubernetes                | No node port |                         |
+| default              | service-sample            |           80 | http://172.17.0.2:30061 |
+| kube-system          | kube-dns                  | No node port |                         |
+| kubernetes-dashboard | dashboard-metrics-scraper | No node port |                         |
+| kubernetes-dashboard | kubernetes-dashboard      | No node port |                         |
+|----------------------|---------------------------|--------------|-------------------------|
+```
+
+13. Dashboard resource
+```
+minikube dashboard
+minikube dashboard --url
+kubectl get service <service_name> --watch
+```
+
+14. Listing containers
+```
+https://kubernetes.io/docs/tasks/access-application-cluster/list-all-running-container-images/
+```
+
+15. Testing application
 ```
 minikube service <service_name>
 ```
@@ -162,6 +178,8 @@ minikube service <service_name>
 ```
 Apply and verify
 kubectl apply -k ./ or kubectl create -k ./
+
+Delete
 kubectl delete -k ./
 
 or execute the commands below following the sequence
@@ -184,63 +202,20 @@ Table Prefix: wp_
 ```
 
 
-# Kubernetes and Minikube commands
-1. Checking minikube status
-```
-minikube status
-```
 
-2. Getting resource status
-```
-kubectl get pods
-kubectl get statefulset
-kubectl get deployment
-kubectl get service
-kubectl get pods <pod_name>
-```
 
-3. Details about a pod
-```
-kubectl describe pods <pod_name>
-kubectl describe pods | grep IP
-```
 
-4. Creating and deleting service in Minikube
+# Docker and docker-compose commands
 ```
-kubectl create/delete -f deployment-app-sample.yaml
-kubectl create/delete -f service-app-sample.yaml
-kubectl create/delete -f permission-db-sample.yaml
-kubectl create/delete -f statefulset-db-sample.yaml
-kubectl create/delete -f service-db-sample.yaml
+Used to test a docker-compose where containers work togheter to simulate the deploy in a Kubernets cluster
 
-kubectl delete statefulsets <statefulset-name>
-```
+docker-compose up -d
+docker-compose down
+docker-compose logs
 
-5. Get url to access service
-```
-minikube service <service_name> --url
+docker ps
 
-minikube service list
-
-|----------------------|---------------------------|--------------|-------------------------|
-|      NAMESPACE       |           NAME            | TARGET PORT  |           URL           |
-|----------------------|---------------------------|--------------|-------------------------|
-| default              | db                        | No node port |                         |
-| default              | kubernetes                | No node port |                         |
-| default              | service-sample            |           80 | http://172.17.0.2:30061 |
-| kube-system          | kube-dns                  | No node port |                         |
-| kubernetes-dashboard | dashboard-metrics-scraper | No node port |                         |
-| kubernetes-dashboard | kubernetes-dashboard      | No node port |                         |
-|----------------------|---------------------------|--------------|-------------------------|
-```
-
-6. Dashboard resource
-```
-minikube dashboard
-minikube dashboard --url
-```
-
-7. Listing containers
-```
-https://kubernetes.io/docs/tasks/access-application-cluster/list-all-running-container-images/
+docker exec -it <database_container> sh
+mysql -u root
+use wordpress
 ```
