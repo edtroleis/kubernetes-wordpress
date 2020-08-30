@@ -22,7 +22,7 @@ In this project it was deployed Wordpress application (3 replicas) connect with 
 
 ```
 
-# Installing minikube
+# Install minikube
 ```
 https://kubernetes.io/docs/tasks/tools/install-minikube/
 ```
@@ -71,7 +71,7 @@ sudo rm -rf /etc/kubernetes/
 docker system prune -af --volumes
 ```
 
-# Configuring Kubernetes cluster and kubernetes commands
+# Configure Kubernetes cluster and kubernetes commands
 https://minikube.sigs.k8s.io/docs/start/
 
 1. Starting minikube cluster
@@ -88,27 +88,27 @@ minikube start
 c. Minikube as default uses 2048MB of memory and 2 CPUs. You can enforce Minikube to create more using command "minikube start --cpus 3 --memory 4096"
 ```
 
-2. Checking minikube status
+2. Check minikube status
 ```
 minikube status
 ```
 
-3. Using minikube cluster
+3. Use minikube cluster
 ```
 kubectl config use-context minikube
 ```
 
-4. Deleting minikube cluster
+4. Delete minikube cluster
 ```
 minikube delete
 ```
 
-5. Stopping minikube cluster
+5. Stop minikube cluster
 ```
 minikube stop
 ```
 
-6. Creating and deleting resources in Minikube
+6. Create and deleting resources in Minikube
 ```
 kubectl create/delete -f deployment-app-sample.yaml
 kubectl create/delete -f service-app-sample.yaml
@@ -119,7 +119,7 @@ kubectl create/delete -f service-db-sample.yaml
 kubectl delete statefulsets <statefulset-name>
 ```
 
-7. Getting resource status (pods, deployments, services, statefulsets, persistentvolume, etc)
+7. Get resource status (pods, deployments, services, statefulsets, persistentvolume, etc)
 ```
 kubectl get pods
 kubectl get deployment
@@ -138,7 +138,7 @@ kubectl describe pods <pod_name>
 kubectl describe pods | grep IP
 ```
 
-9. Deleting pods
+9. Delete pods
 ```
 kubectl delete pods <pod_name>
 ```
@@ -179,17 +179,17 @@ minikube dashboard --url
 kubectl get service <service_name> --watch
 ```
 
-14. Listing containers
+14. List containers
 ```
 https://kubernetes.io/docs/tasks/access-application-cluster/list-all-running-container-images/
 ```
 
-15. Testing application
+15. Test application
 ```
 minikube service <service_name>
 ```
 
-16. Accessing minikube
+16. Access minikube
 ```
 minikube ssh
 ```
@@ -212,18 +212,14 @@ kubectl create/delete -f ./db/statefulset-db-sample.yaml
 kubectl create/delete -f ./db/service-db-sample.yaml
 
 
-# Connecting Wordpress with Mysql parameters
+# Connect Wordpress with Mysql parameters
 
 Database Name: wordpress
 Username: root
 Password: password
 Database Host: db
 Table Prefix: wp_
-
 ```
-
-
-
 
 
 # Docker and docker-compose commands
