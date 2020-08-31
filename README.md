@@ -77,6 +77,7 @@ https://minikube.sigs.k8s.io/docs/start/
 1. Starting minikube cluster
 ```
 minikube start
+minikube start --cpus 3 --memory 4096 --vm-driver=virtualbox
 
 # Increase performance
 a. Use logs command minikube logs
